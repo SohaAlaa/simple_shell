@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * _erratoi - fn converts a string to an integer
- * @s: the string to be converted
+ * stringto_intger - is a fn that converts a string to an integer
+ *-s: the string to be converted
  * Return: 0 if no numbers in string, converted number otherwise
  *       -1 on error
  */
-int _erratoi(char *s)
+int stringto_intger(char *s)
 {
 	int i = 0;
 	unsigned long int result = 0;
@@ -29,38 +29,38 @@ int _erratoi(char *s)
 }
 
 /**
- * print_error - fn  prints an error message
- * @info: the parameter & return info struct
- * @estr: string containing specified error type
+ * printsthe.er - is a fn that prints an error message
+ *   the parameter & return info struct
+ *-estr: string containing specified error type
  * Return: 0 if no numbers in string, converted number otherwise
  *        -1 on error
  */
-void print_error(info_t *info, char *estr)
+void printsthe.er(info.t *info, char *estr)
 {
-	_eputs(info->fname);
-	_eputs(": ");
-	print_d(info->line_count, STDERR_FILENO);
-	_eputs(": ");
-	_eputs(info->argv[0]);
-	_eputs(": ");
-	_eputs(estr);
+	eputs(info->fname);
+	eputs(": ");
+	prt-decimal(info->line_count, STDERR_FILENO);
+	eputs(": ");
+	eputs(info->argv[0]);
+	eputs(": ");
+	eputs(estr);
 }
 
 /**
- * print_d - a function prints a decimal (integer) number (base 10)
- * @input: the input
- * @fd: the filedescriptor to write to
+ * prt-decimal - is a fn that function prints a decimal (integer) number (base 10)
+ *-input: the input
+ *-fd: the filedescriptor to write to
  *
  * Return: number of characters printed
  */
-int print_d(int input, int fd)
+int prt-decimal(int input, int fd)
 {
 	int (*__putchar)(char) = _putchar;
 	int i, count = 0;
 	unsigned int _abs_, current;
 
 	if (fd == STDERR_FILENO)
-		__putchar = _eputchar;
+		__putchar = _eput.ch;
 	if (input < 0)
 	{
 		_abs_ = -input;
@@ -86,29 +86,29 @@ int print_d(int input, int fd)
 }
 
 /**
- * convert_number  fn - converter function, a clone of itoa
- * @num: number
- * @base: base
- * @flags: argument flags
+ * cvrt_no - is a fn that converter function, a clone of itoa
+ *-num: number
+ *-base: base
+ *-_flags: argument _flags
  *
  * Return: string
  */
-char *convert_number(long int num, int base, int flags)
+char *cvrt_no(long int num, int base, int _flags)
 {
 	static char *array;
-	static char buffer[50];
+	static char bufffer[50];
 	char sign = 0;
 	char *ptr;
 	unsigned long n = num;
 
-	if (!(flags & CONVERT_UNSIGNED) && num < 0)
+	if (!(_flags & CONVERT_UNSIGNED) && num < 0)
 	{
 		n = -num;
 		sign = '-';
 
 	}
-	array = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
-	ptr = &buffer[49];
+	array = _flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
+	ptr = &bufffer[49];
 	*ptr = '\0';
 
 	do	{
@@ -122,19 +122,19 @@ char *convert_number(long int num, int base, int flags)
 }
 
 /**
- * remove_comments -  fn function replaces first instance of '#' with '\0'
- * @buf: address of the string to modify
+ * rmvcomment - is a fn that function replaces first instance of '#' with '\0'
+ *-buff: address of the string to modify
  *
  * Return: Always 0;
  */
-void remove_comments(char *buf)
+void rmvcomment(char *buff)
 {
 	int i;
 
-	for (i = 0; buf[i] != '\0'; i++)
-		if (buf[i] == '#' && (!i || buf[i - 1] == ' '))
+	for (i = 0; buff[i] != '\0'; i++)
+		if (buff[i] == '#' && (!i || buff[i - 1] == ' '))
 		{
-			buf[i] = '\0';
+			buff[i] = '\0';
 			break;
 		}
 }
