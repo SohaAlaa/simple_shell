@@ -13,16 +13,16 @@ int _exitshell(info_t *info)
 
 	if (info->argv[1])  /* If there is an exit argument */
 	{
-		checkexit = _erratoi(info->argv[1]);
+		checkexit = _conv_str_int(info->argv[1]);
 		if (checkexit == -1)
 		{
 			info->status = 2;
-			print_error(info, "Illegal number: ");
-			_eputs(info->argv[1]);
-			_eputchar('\n');
+			msg_wrong(info, "Illegal number: ");
+			_prt_ip_str(info->argv[1]);
+			_wr_char_c('\n');
 			return (1);
 		}
-		info->num_error = _erratoi(info->argv[1]);
+		info->num_error = _conv_str_int(info->argv[1]);
 		return (-2);
 	}
 	info->num_error = -1;
@@ -42,56 +42,56 @@ int _cd(info_t *info)
 
 	s = getcwd(buffer, 1024);
 	if (!s)
-		_puts("TODO: >>getcwd failure msg<<\n");
+		prt_ip_string("TODO: >>getcwd failure msg<<\n");
 	if (!info->argv[1])
 	{
-		dir = _getenv(info, "HOME=");
+		dir = get_valu_envir(info, "HOME=");
 		if (!dir)
 			changedir_ret = /* TODO: what should this be? */
-				chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
+				chdir((dir = get_valu_envir(info, "PWD=")) ? dir : "/");
 		else
 			changedir_ret = chdir(dir);
 	}
-	else if (_strcmp(info->argv[1], "-") == 0)
+	else if (_compare_lexo(info->argv[1], "-") == 0)
 	{
-		if (!_getenv(info, "OLDPWD="))
+		if (!get_valu_envir(info, "OLDPWD="))
 		{
-			_puts(s);
-			_putchar('\n');
+			prt_ip_string(s);
+			wr_charC_out('\n');
 			return (1);
 		}
-		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
+		prt_ip_string(get_valu_envir(info, "OLDPWD=")), wr_charC_out('\n');
 		changedir_ret = /* TODO: what should this be? */
-			chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
+			chdir((dir = get_valu_envir(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
 		changedir_ret = chdir(info->argv[1]);
 	if (changedir_ret == -1)
 	{
-		print_error(info, "can't cd to ");
-		_eputs(info->argv[1]), _eputchar('\n');
+		msg_wrong(info, "can't cd to ");
+		_prt_ip_str(info->argv[1]), _wr_char_c('\n');
 	}
 	else
 	{
-		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
-		_setenv(info, "PWD", getcwd(buffer, 1024));
+		_init_new_env_var(info, "OLDPWD", get_valu_envir(info, "PWD="));
+		_init_new_env_var(info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
 }
 
 /**
- * _chdirprocess -is a fn that  changes the current directory of the process
+ * change_current_dir -is a fn that  changes the current directory of the process
  * Struct containing potential arguments. Used to maintain
  *          constant function prototype.
  *  Return: Always 0
  */
-int _chdirprocess(info_t *info)
+int change_current_dir(info_t *info)
 {
 	char **arg_array;
 
 	arg_array = info->argv;
-	_puts("help call works. Function not yet implemented \n");
+	prt_ip_string("help call works. Function not yet implemented \n");
 	if (0)
-		_puts(*arg_array); /* temp att_unused workaround */
+		prt_ip_string(*arg_array); /* temp att_unused workaround */
 	return (0);
 }
