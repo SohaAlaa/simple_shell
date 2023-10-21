@@ -37,7 +37,7 @@ char *copy_theSTR(char *dest, char *src, int n)
  *n: the amount of bytes to be maximally used
  *Return: the concatenated string
  */
-char * concat_strings(char *dest, char *src, int n)
+char *concat_strings(char *dest, char *src, int n)
 {
 	int i, j;
 	char *s = dest;
@@ -63,7 +63,7 @@ char * concat_strings(char *dest, char *src, int n)
  *c: the character to look for
  *Return: (s) a pointer to the memory area s
  */
-char * add_character_toSTR(char *s, char c)
+char *add_character_toSTR(char *s, char c)
 {
 	do {
 		if (*s == c)
