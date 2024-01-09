@@ -60,7 +60,7 @@ int find_comm_in(info_t *info)
 		{"env", prt_current_environ},
 		{"help", change_current_dir},
 		{"history", display_H_list},
-		{"setenv", init_new_envir_var},
+		{"setenv",init_new_envir_var},
 		{"unsetenv", rm_envir_var},
 		{"cd", _cd},
 		{"alias", symbol_alias},

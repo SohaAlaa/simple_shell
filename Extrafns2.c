@@ -1,4 +1,4 @@
-i#include "shell.h"
+#include "shell.h"
 
 /**
  * _conv_str_int - is a fn that converts a string to an integer
